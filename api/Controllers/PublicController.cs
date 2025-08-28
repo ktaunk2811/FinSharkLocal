@@ -1,4 +1,5 @@
 ﻿using api.Interfaces;
+using api.Mappers;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,11 @@ namespace api.Controllers
         public IActionResult GetAllUsers()
         {
             var users = _userRepo.GetAll();
+            var alluserdto = users.Select(c => c.UsertoAllUserDto());
+
             if(users== null || users.Count == 0)
                 return NotFound();
-            return Ok(users);
+            return Ok(alluserdto);
 
         }
 
