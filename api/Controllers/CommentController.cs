@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using api.Dtos.Comment;
 using api.Extensions;
 using api.Interfaces;
@@ -10,8 +7,7 @@ using api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace api.Controllers
 {
@@ -67,8 +63,6 @@ namespace api.Controllers
             var username = User.GetUserName();
 
             var AppUser = await _userManager.FindByNameAsync(username);
-
-
             var commentModel = commentDto.ToCommentFromCreate(stockid);
             commentModel.AppUserId = AppUser.Id;
             await _commentrepo.CreateAsync(commentModel);
